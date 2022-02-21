@@ -49,7 +49,7 @@ public class DashboardProvider {
             Long created = product.getCreated();
             if (created != null) {
                 Duration between = Duration.between(Instant.ofEpochSecond(created), Instant.now());
-                long days = between.abs().get(ChronoUnit.DAYS);
+                long days = between.abs().toDays();
                 dashboardProduct.setLastDays(String.valueOf(days));
             }else {
                 dashboardProduct.setLastDays("N/A");

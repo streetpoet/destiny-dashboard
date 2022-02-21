@@ -90,13 +90,8 @@
                                 <div class="media-body text-right">
                                     <h4 class="danger font-weight-bold" th:text="${p.productId}"></h4>
                                     <h6 class="warning font-weight-bold" th:text="${p.completePercentage + '%'}"></h6>
+                                    <h6 class="warning font-weight-bold" th:text="${p.lastDays + 'd'}"></h6>
                                 </div>
-                            </div>
-                            <div class="progress mt-1 mb-0" style="height: 7px;">
-                                <div class="progress-bar bg-danger" role="progressbar"
-                                     th:style="${'width: ' + p.completePercentage + '%'}"
-                                     th:aria-valuenow="${p.completePercentage}" aria-valuemin="0"
-                                     aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
