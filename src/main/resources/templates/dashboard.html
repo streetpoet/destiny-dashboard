@@ -1,137 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>EDEN</title>
     <meta charset="UTF-8">
+    <title>DESTINY DASHBOARD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Refresh" content="60">
-    <link rel="stylesheet" type="text/css"
-          href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/fonts/simple-line-icons/style.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/colors.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://pixinvent.com/stack-responsive-bootstrap-4-admin-template/app-assets/css/bootstrap-extended.min.css">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <style>
-        body {
-          background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        .badge {
+          border-radius:                    0px;
+          -webkit-border-radius:            0px;
+          -moz-border-radius:               0px;
+        }
+        .alert {
+          border-radius:                    0px;
+          -webkit-border-radius:            0px;
+          -moz-border-radius:               0px;
         }
 
     </style>
-    <style type="text/css">
-        .card {
-            background-color: rgba(245, 245, 245, 0.8);
-            border-radius: 0px;
-            border: none;
-            position: relative;
-            margin-bottom: 30px;
-            box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
-        }
-
-    </style>
-    <script>
-        window.console = window.console || function(t) {};
-
-    </script>
-    <script>
-        if (document.location.search.match(/type=embed/gi)) {
-          window.parent.postMessage("resize", "*");
-        }
-
-    </script>
 </head>
 <body>
-
-<div class="grey-bg container-fluid">
-    <section id="s1">
-        <div class="row">
-            <div class="col-12 mt-3 mb-1">
-                <h5 class="text-uppercase text-white">mature period</h5>
+<div class="container-fluid" style="padding: 20px;">
+    <div class="row py-1">
+        <div class="col-12">
+            <div class="list-group font-monospace">
+                <a href="#"
+                   class="list-group-item list-group-item-action flex-column align-items-start active py-1 bg-dark">
+                    <h6 class="mb-0">SUMMARY</h6>
+                    <small class="text-muted">last update: -</small>
+                    <small class="mb-1">Initial Fund: $5000</small><br/>
+                    <small class="mb-1">Real Time Balance: -</small><br/>
+                    <small>Stable ARR: -%</small><br/>
+                    <small>Real Time ARR: -%</small><br/>
+                    <small>Buy Times: -</small><br/>
+                    <small>Sell Times: -</small>
+                </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-6" th:each="p : ${dashboard.matureDashboardProducts}">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="media d-flex">
-                                <div class="align-self-center">
-                                    <i class="icon-rocket success font-medium-2 float-left"></i>
-                                </div>
-                                <div class="media-body text-right">
-                                    <h4 class="primary font-weight-bold" th:text="${p.productId}"></h4>
-                                    <h6 class="info font-weight-bold" th:text="${p.completePercentage + '%'}"></h6>
-                                    <h6 class="info font-weight-bold" th:text="${p.lastDays + 'd'}"></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-dismissible alert-dark p-1 px-3 mb-1" th:each="p : ${dashboard}">
+                <span class="badge bg-dark px-2" th:text="${p.productId}"></span>
+                <span class="badge bg-success px-2" th:text="${p.completeRate + '%'}"></span>
+                <span class="badge bg-info px-2" th:text="${'C' + p.buyCount}"></span>
+                <span class="badge bg-warning px-2" th:text="'D' + ${p.buyDays}"></span>
+                <span class="badge bg-primary px-2" th:if="${p.longTerm}">LT</span>
             </div>
         </div>
-    </section>
-    <section id="s2">
-        <div class="row">
-            <div class="col-12 mt-3 mb-1">
-                <h5 class="text-uppercase text-white">incubation period</h5>
-            </div>
+        <div class="d-grid gap-2">
+            <a class="btn btn-lg btn-primary font-monospace" href="/">Back Home</a>
         </div>
-        <div class="row">
-            <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-6"
-                 th:each="p : ${dashboard.incubationDashboardProducts}">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="media d-flex">
-                                <div class="align-self-center">
-                                    <i class="icon-cup danger font-medium-2 float-left"></i>
-                                </div>
-                                <div class="media-body text-right">
-                                    <h4 class="danger font-weight-bold" th:text="${p.productId}"></h4>
-                                    <h6 class="warning font-weight-bold" th:text="${p.completePercentage + '%'}"></h6>
-                                    <h6 class="warning font-weight-bold" th:text="${p.lastDays + 'd'}"></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="s3">
-        <div class="row">
-            <div class="col-4 mt-3 mb-1">
-                <h5 class="text-uppercase text-white">harvest</h5>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 col-12" th:each="p : ${dashboard.dashboardSoldProducts}">
-                <div class="card overflow-hidden">
-                    <div class="card-content">
-                        <div class="card-body cleartfix">
-                            <div class="media align-items-stretch">
-                                <div class="align-self-center">
-                                    <i class="icon-credit-card primary font-large-2 mr-2"></i>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="primary font-weight-bold" th:text="${p.productId}"></h4>
-                                    <span class="text-primary" th:text="${'sold at: $' + p.soldPrice}"></span><br/>
-                                    <span class="text-primary" th:text="${p.soldDateTime}"></span>
-                                </div>
-                                <div class="align-self-center">
-                                    <span class="text-primary">(ROE)</span>
-                                    <h1 class="primary"><b>5%</b></h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 </div>
-
 </body>
 </html>
