@@ -34,7 +34,8 @@
                             <p class="text-light font-monospace">Arr: 25.28%</p>
                             <p class="text-light font-monospace">Capacity: 10%</p>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                     role="progressbar"
                                      aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
                             </div>
                         </div>
@@ -45,9 +46,8 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <div class="alert alert-dismissible alert-dark p-2 px-3 mb-2 mt-1 shadow-lg" th:each="p : ${dashboard}">
-                    <span class="badge bg-dark px-2 py-1" th:text="${p.productId}"
-                          style="margin-bottom: 1px;"></span>
+            <div class="alert alert-dismissible alert-dark p-2 px-2 mb-2 mt-1 shadow-lg" th:each="p : ${dashboard}">
+                <span class="badge bg-dark px-2 py-1" th:text="${p.productId}" style="margin-bottom: 1px;"></span>
                 <span class="badge bg-success px-2 py-1" th:text="${p.completeRate + '%'}"></span>
                 <span class="badge bg-info px-2 py-1" th:text="${'C' + p.buyCount}"></span>
                 <span class="badge bg-primary px-2 py-1" th:text="'D' + ${p.buyDays}"></span>
@@ -55,7 +55,7 @@
             </div>
         </div>
         <div class="d-grid gap-2">
-            <a class="btn btn-lg btn-primary font-monospace" href="/">HOME</a>
+            <a class="btn btn-primary font-monospace" href="/">HOME</a>
         </div>
     </div>
 </div>
