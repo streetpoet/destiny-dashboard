@@ -24,7 +24,7 @@ public class DashboardLiveData {
 
     @Data
     public static class AccountInfo {
-        private Double totalFundAmount = Double.MAX_VALUE;
-        private Double balance = Double.MIN_VALUE;
+        private Double totalFundAmount = 1.0;
+        private Double balance = 0.0;
     }
 }
