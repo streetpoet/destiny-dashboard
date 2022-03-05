@@ -1,12 +1,15 @@
 package com.spstudio.dashboard.controller;
 
 import com.spstudio.dashboard.service.DashboardProvider;
+import com.spstudio.dashboard.service.model.DashboardLiveData;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Collections;
@@ -29,6 +32,21 @@ public class DashBoardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
+        model.addAttribute("dashboard", buildWebPageProductModelList());
+        model.addAttribute("account", buildWebPageAccount());
+        return "dashboard";
+    }
+
+    private DashBoardAccount buildWebPageAccount() {
+        DashBoardAccount dashBoardAccount = new DashBoardAccount();
+        DashboardLiveData.AccountInfo accountInfo = dashboardProvider.getDashBoard().getAccountInfo();
+        dashBoardAccount.setBalance(df.format(accountInfo.getBalance()));
+        double utilizeRate = (accountInfo.getTotalFundAmount() - accountInfo.getBalance()) * 100 / accountInfo.getTotalFundAmount();
+        dashBoardAccount.setUtilizeRate(BigDecimal.valueOf(utilizeRate).setScale(0, RoundingMode.UP).toPlainString());
+        return dashBoardAccount;
+    }
+
+    private List<DashBoardModel> buildWebPageProductModelList() {
         List<DashBoardModel> products = dashboardProvider.getDashBoard().getActiveProducts().stream().map(x -> {
             DashBoardModel dashBoardModel = new DashBoardModel();
             dashBoardModel.setProductId(x.getProductId());
@@ -41,8 +59,13 @@ public class DashBoardController {
             return dashBoardModel;
         }).sorted(Comparator.comparing(DashBoardModel::getCompleteRate)).collect(Collectors.toList());
         Collections.reverse(products);
-        model.addAttribute("dashboard", products);
-        return "dashboard";
+        return products;
+    }
+
+    @Data
+    static class DashBoardAccount {
+        private String balance;
+        private String utilizeRate;
     }
 
     @Data

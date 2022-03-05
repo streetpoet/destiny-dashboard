@@ -9,6 +9,7 @@ import java.util.List;
 public class DashboardLiveData {
 
     private List<DashboardProductStatus> activeProducts = new ArrayList<>();
+    private AccountInfo accountInfo = new AccountInfo();
 
     @Data
     public static class DashboardProductStatus {
@@ -19,5 +20,11 @@ public class DashboardLiveData {
         private Boolean isLongTerm;
         private Integer buyCount;
         private Long created;
+    }
+
+    @Data
+    public static class AccountInfo {
+        private Double totalFundAmount = Double.MAX_VALUE;
+        private Double balance = Double.MIN_VALUE;
     }
 }

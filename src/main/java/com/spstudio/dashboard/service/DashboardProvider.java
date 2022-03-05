@@ -22,6 +22,7 @@ public class DashboardProvider {
         });
         synchronized (dashBoard) {
             dashBoard.setActiveProducts(activeProducts);
+            dashBoard.setAccountInfo(dashboardLiveData.getAccountInfo());
         }
     }
 }
