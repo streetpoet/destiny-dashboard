@@ -5,14 +5,13 @@
     <title>DESTINY DASHBOARD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="./bootstrap.min.css" rel="stylesheet">
     <style>
         .btn, .card, .badge, .alert, .progress {
           border-radius:                    0px;
           -webkit-border-radius:            0px;
           -moz-border-radius:               0px;
         }
-
-
     </style>
 </head>
 <body>
@@ -32,8 +31,10 @@
                 <div class="col-12">
                     <div class="card bg-dark">
                         <div class="card-body">
-                            <p class="text-light font-monospace">Balance: <span
+                            <p class="text-light font-monospace">Total Balance: <span
                                     th:text="'$' + ${account.balance}"></span></p>
+                            <p class="text-light font-monospace">USD Balance: <span
+                                    th:text="'$' + ${account.usdBalance}"></span></p>
                             <p class="text-light font-monospace">Load Rate: <span
                                     th:text="${account.utilizeRate + '%'}"></span></p>
                             <div class="progress">
@@ -42,6 +43,8 @@
                                      aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
                                      th:style="'width: ' + ${account.utilizeRate} + '%;'"></div>
                             </div>
+                            <span class="badge bg-success px-1 py-1 mt-1" th:text="${account.sharpUpRate}">23.45%</span>
+                            <span class="badge bg-primary px-1 py-1" th:text="${account.sharpDownRate}">23.45%</span>
                         </div>
                     </div>
                 </div>
@@ -51,11 +54,11 @@
     <div class="row">
         <div class="col-12">
             <div class="alert alert-dismissible alert-dark p-2 px-2 mb-2 mt-1 shadow-lg" th:each="p : ${dashboard}">
-                <span class="badge bg-dark px-2 py-1" th:text="${p.productId}" style="margin-bottom: 1px;"></span>
-                <span class="badge bg-success px-2 py-1" th:text="${p.completeRate + '%'}"></span>
-                <span class="badge bg-info px-2 py-1" th:text="${'C' + p.buyCount}"></span>
-                <span class="badge bg-primary px-2 py-1" th:text="'D' + ${p.buyDays}"></span>
-                <span class="badge bg-light px-2 py-1" th:if="${p.longTerm}"></span>
+                <span class="badge bg-dark px-2 py-1" th:text="${p.productId}" style="margin-bottom: 1px;"></span><span
+                    class="badge bg-success px-2 py-1" th:text="${p.completeRate + '%'}"></span><span
+                    class="badge bg-info px-2 py-1" th:text="${'C' + p.buyCount}"></span><span
+                    class="badge bg-primary px-2 py-1" th:text="'D' + ${p.buyDays}"></span><span
+                    class="badge bg-light px-2 py-1" th:if="${p.longTerm}"></span>
             </div>
         </div>
         <div class="d-grid gap-2">

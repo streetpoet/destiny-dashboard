@@ -41,8 +41,11 @@ public class DashBoardController {
         DashBoardAccount dashBoardAccount = new DashBoardAccount();
         DashboardLiveData.AccountInfo accountInfo = dashboardProvider.getDashBoard().getAccountInfo();
         dashBoardAccount.setBalance(df.format(accountInfo.getBalance()));
-        double utilizeRate = (accountInfo.getTotalFundAmount() - accountInfo.getBalance()) * 100 / accountInfo.getTotalFundAmount();
+        double utilizeRate = (accountInfo.getTotalFundAmount() - accountInfo.getUsdBalance()) * 100 / accountInfo.getTotalFundAmount();
         dashBoardAccount.setUtilizeRate(BigDecimal.valueOf(utilizeRate).setScale(0, RoundingMode.UP).toPlainString());
+        dashBoardAccount.setUsdBalance(df.format(accountInfo.getUsdBalance()));
+        dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate()));
+        dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate()));
         return dashBoardAccount;
     }
 
@@ -55,9 +58,10 @@ public class DashBoardController {
             dashBoardModel.setBuyCount(String.valueOf(x.getBuyCount()));
             double rate = x.getLatestCbPrice() * 100 / (x.getBasePrice() * (1.01 + x.getPreferredProfit()));
             dashBoardModel.setCompleteRate(df.format(rate));
+            dashBoardModel.setCompleteRateInDouble(rate);
             dashBoardModel.setLongTerm(x.getIsLongTerm());
             return dashBoardModel;
-        }).sorted(Comparator.comparing(DashBoardModel::getCompleteRate)).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(DashBoardModel::getCompleteRateInDouble)).collect(Collectors.toList());
         Collections.reverse(products);
         return products;
     }
@@ -65,7 +69,10 @@ public class DashBoardController {
     @Data
     static class DashBoardAccount {
         private String balance;
+        private String usdBalance;
         private String utilizeRate;
+        private String sharpUpRate;
+        private String sharpDownRate;
     }
 
     @Data
@@ -75,5 +82,6 @@ public class DashBoardController {
         private String buyCount;
         private String buyDays;
         private Boolean longTerm;
+        private Double completeRateInDouble;
     }
 }
