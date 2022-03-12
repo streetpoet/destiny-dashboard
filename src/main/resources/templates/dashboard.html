@@ -3,67 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>DESTINY DASHBOARD</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <style>
-        .btn, .card, .badge, .alert, .progress {
-          border-radius:                    0px;
-          -webkit-border-radius:            0px;
-          -moz-border-radius:               0px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link th:href="@{/css/neumorphism.css}" rel="stylesheet">
 </head>
-<body>
-<div class="container-fluid" style="padding: 20px;">
-    <div class="row">
-        <div class="col-12">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand px-1" href="#">DESTINY DASHBOARD</a>
-                </div>
-            </nav>
+<body translate="no">
+<header class="header-global">
+    <nav id="navbar-main" aria-label="Primary navigation"
+         class="navbar navbar-main navbar-expand-lg navbar-theme-primary headroom navbar-light">
+        <div class="container position-relative">
+            <a class="navbar-brand shadow-soft py-2 px-4 rounded border border-light ml-3" href="#">
+                <img class="navbar-brand-light" th:src="@{/img/dark.svg}">
+            </a>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="row py-1">
+    </nav>
+</header>
+<main>
+    <div class="section bg-primary section-lg">
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
-                    <div class="card bg-dark">
-                        <div class="card-body">
-                            <p class="text-light font-monospace">Total Balance: <span
-                                    th:text="'$' + ${account.balance}"></span></p>
-                            <p class="text-light font-monospace">USD Balance: <span
-                                    th:text="'$' + ${account.usdBalance}"></span></p>
-                            <p class="text-light font-monospace">Load Rate: <span
-                                    th:text="${account.utilizeRate + '%'}"></span></p>
+                    <div class="card bg-primary shadow-soft border-light">
+                        <div class="card-body p-5">
+                            <h5 class="text-muted text-uppercase"><small>Total Balance: <span
+                                    th:text="'$' + ${account.balance}"></span></small></h5>
+                            <h5 class="text-muted text-uppercase"><small>USD Balance: <span
+                                    th:text="'$' + ${account.usdBalance}"></span></small></h5>
+                            <h5 class="text-muted text-uppercase"><small>Load Rate: <span
+                                    th:text="${account.utilizeRate + '%'}"></span></small></h5>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                <div class="progress-bar bg-gray"
                                      role="progressbar"
-                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"
                                      th:style="'width: ' + ${account.utilizeRate} + '%;'"></div>
                             </div>
-                            <span class="badge bg-success px-1 py-1 mt-1" th:text="${account.sharpUpRate}">23.45%</span>
-                            <span class="badge bg-primary px-1 py-1" th:text="${account.sharpDownRate}">23.45%</span>
+                            <span class="badge badge-success px-2 py-1 mt-1"
+                                  th:text="${account.sharpUpRate} + '%'">22%</span>
+                            <span class="badge badge-danger px-2 py-1"
+                                  th:text="${account.sharpDownRate} + '%'">18%</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-dismissible alert-dark p-2 px-2 mb-2 mt-1 shadow-lg" th:each="p : ${dashboard}">
-                <span class="badge bg-dark px-2 py-1" th:text="${p.productId}" style="margin-bottom: 1px;"></span><span
-                    class="badge bg-success px-2 py-1" th:text="${p.completeRate + '%'}"></span><span
-                    class="badge bg-info px-2 py-1" th:text="${'C' + p.buyCount}"></span><span
-                    class="badge bg-primary px-2 py-1" th:text="'D' + ${p.buyDays}"></span><span
-                    class="badge bg-light px-2 py-1" th:if="${p.longTerm}"></span>
+            <div class="row justify-content-center pt-5">
+                <div class="col-12 col-md-10">
+                    <div class="alert alert-dark shadow-soft" role="alert" th:each="p : ${dashboard}">
+                        <span class="badge badge-dark text-uppercase px-2 py-1" th:text="${p.productId}"
+                              style="margin-bottom: 1px;">BTC-USD</span>
+                        <span class="badge badge-success px-2 py-1" th:text="${p.completeRate + '%'}">25%</span>
+                        <span class="badge badge-info px-2 py-1" th:text="${'C' + p.buyCount}">C3</span>
+                        <span class="badge badge-warning px-2 py-1" th:text="'D' + ${p.buyDays}">D4</span>
+                        <span class="badge badge-light px-2 py-1" th:if="${p.longTerm}">LT</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center pt-5">
+                <div class="col-12">
+                    <a class="btn btn-lg btn-primary" href="/" style="width: 100%"><span
+                            class="fas fa-file-invoice"></span>HOME</a>
+                </div>
             </div>
         </div>
-        <div class="d-grid gap-2">
-            <a class="btn btn-primary font-monospace" href="/">HOME</a>
-        </div>
     </div>
-</div>
+</main>
 </body>
 </html>
