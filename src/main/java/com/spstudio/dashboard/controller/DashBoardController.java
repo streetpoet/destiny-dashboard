@@ -44,8 +44,8 @@ public class DashBoardController {
         double utilizeRate = (accountInfo.getTotalFundAmount() - accountInfo.getUsdBalance()) * 100 / accountInfo.getTotalFundAmount();
         dashBoardAccount.setUtilizeRate(BigDecimal.valueOf(utilizeRate).setScale(0, RoundingMode.UP).toPlainString());
         dashBoardAccount.setUsdBalance(df.format(accountInfo.getUsdBalance()));
-        dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate()));
-        dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate()));
+        dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate() * 100));
+        dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate() * 100));
         return dashBoardAccount;
     }
 
