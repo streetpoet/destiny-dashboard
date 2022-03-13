@@ -24,10 +24,11 @@ public class DashboardLiveData {
 
     @Data
     public static class AccountInfo {
-        private Double totalFundAmount = 1.0;
         private Double balance = 0.0;
         private Double usdBalance = 0.0;
         private Double sharpUpRate = 0.0;
         private Double sharpDownRate = 0.0;
+        private Double reshuffleProgress = 0.0;
+        private Double reshuffleProgress2 = 0.0;
     }
 }

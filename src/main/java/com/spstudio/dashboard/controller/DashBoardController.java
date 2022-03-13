@@ -41,11 +41,13 @@ public class DashBoardController {
         DashBoardAccount dashBoardAccount = new DashBoardAccount();
         DashboardLiveData.AccountInfo accountInfo = dashboardProvider.getDashBoard().getAccountInfo();
         dashBoardAccount.setBalance(df.format(accountInfo.getBalance()));
-        double utilizeRate = (accountInfo.getTotalFundAmount() - accountInfo.getUsdBalance()) * 100 / accountInfo.getTotalFundAmount();
+        double utilizeRate = (accountInfo.getBalance() - accountInfo.getUsdBalance()) * 100 / accountInfo.getBalance();
         dashBoardAccount.setUtilizeRate(BigDecimal.valueOf(utilizeRate).setScale(0, RoundingMode.UP).toPlainString());
         dashBoardAccount.setUsdBalance(df.format(accountInfo.getUsdBalance()));
         dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate() * 100));
         dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate() * 100));
+        dashBoardAccount.setReshuffleProgress(df.format(accountInfo.getReshuffleProgress() * 100));
+        dashBoardAccount.setReshuffleProgress2(df.format(accountInfo.getReshuffleProgress2() * 100));
         return dashBoardAccount;
     }
 
@@ -73,6 +75,8 @@ public class DashBoardController {
         private String utilizeRate;
         private String sharpUpRate;
         private String sharpDownRate;
+        private String reshuffleProgress;
+        private String reshuffleProgress2;
     }
 
     @Data
