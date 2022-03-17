@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <title>DESTINY DASHBOARD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link th:href="@{/css/bootstrap.sketchy.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn, .card, .badge, .alert, .progress {
+          border-radius:                    0px;
+          -webkit-border-radius:            0px;
+          -moz-border-radius:               0px;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container-fluid" style="padding: 20px;">
     <div class="row">
         <div class="col-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container-fluid">
                     <a class="navbar-brand px-1" href="#">DESTINY DASHBOARD</a>
                 </div>
             </nav>
         </div>
     </div>
-    <div class="row pt-4">
+    <div class="row">
         <div class="col-12">
             <div class="row py-1">
                 <div class="col-12">
@@ -32,11 +41,11 @@
                                 <div><span th:text="'$' + ${account.usdBalance}">$1000</span></div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div><h6 class="text-uppercase">Reshuffle-101:</h6></div>
+                                <div><h6 class="text-uppercase">Reshuffle-1:</h6></div>
                                 <div><span th:text="${account.reshuffleProgress + '%'}">25%</span></div>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <div><h6 class="text-uppercase">Reshuffle-102:</h6></div>
+                                <div><h6 class="text-uppercase">Reshuffle-2:</h6></div>
                                 <div><span th:text="${account.reshuffleProgress2 + '%'}">25%</span></div>
                             </div>
                             <div class="d-flex justify-content-between">
@@ -44,14 +53,14 @@
                                 <div><span th:text="${account.utilizeRate + '%'}">$1000</span></div>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-info"
+                                <div class="progress-bar progress-bar-striped bg-primary"
                                      role="progressbar"
                                      aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
                                      th:style="'width: ' + ${account.utilizeRate} + '%;'"></div>
                             </div>
                             <span class="badge bg-success px-1 py-1 mt-1"
                                   th:text="${account.sharpUpRate} + '%'">23.45%</span>
-                            <span class="badge bg-danger px-1 py-1"
+                            <span class="badge bg-primary px-1 py-1"
                                   th:text="${account.sharpDownRate} + '%'">23.45%</span>
                         </div>
                     </div>
@@ -59,24 +68,17 @@
             </div>
         </div>
     </div>
-    <div class="row pt-4">
+    <div class="row">
         <div class="col-12">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center"
-                    th:each="p : ${dashboard}">
-                    <div>
-                        <span class="badge bg-primary px-2 py-1" th:text="${p.productId}" style="margin-bottom: 1px;">ETH-USD</span>
-                        <span class="badge bg-success px-2 py-1" th:text="${p.completeRate + '%'}">98%</span>
-                        <span class="badge bg-info px-2 py-1" th:text="${'C' + p.buyCount}">C1</span>
-                    </div>
-                    <span class="badge bg-danger px-2 py-1" th:text="${p.buyDays} + 'd'">14 d</span>
-                </li>
-            </ul>
+            <div class="alert alert-dismissible alert-dark p-2 px-2 mb-2 mt-1 shadow-lg" th:each="p : ${dashboard}">
+                <span class="badge bg-dark px-2 py-1" th:text="${p.productId}" style="margin-bottom: 1px;"></span><span
+                    class="badge bg-success px-2 py-1" th:text="${p.completeRate + '%'}"></span><span
+                    class="badge bg-info px-2 py-1" th:text="${'C' + p.buyCount}"></span><span
+                    class="badge bg-primary px-2 py-1" th:text="'D' + ${p.buyDays}"></span>
+            </div>
         </div>
-    </div>
-    <div class="row pt-4">
-        <div class="d-grid gap-2 pt-2">
-            <a class="btn btn-lg btn-outline-primary p-3" href="/">HOME</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-lg btn-primary p-2" href="/">HOME</a>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Controller
 public class DashBoardController {
 
-    private final DecimalFormat df = new DecimalFormat("0.#");
+    private final DecimalFormat df = new DecimalFormat("#,###.##");
 
     @Autowired
     DashboardProvider dashboardProvider;
@@ -41,13 +41,13 @@ public class DashBoardController {
         DashBoardAccount dashBoardAccount = new DashBoardAccount();
         DashboardLiveData.AccountInfo accountInfo = dashboardProvider.getDashBoard().getAccountInfo();
         dashBoardAccount.setBalance(df.format(accountInfo.getBalance()));
-        double utilizeRate = (accountInfo.getBalance() - accountInfo.getUsdBalance()) * 100 / accountInfo.getBalance();
+        double utilizeRate = (accountInfo.getBalance() - accountInfo.getUsdBalance()) * 100.0 / accountInfo.getBalance();
         dashBoardAccount.setUtilizeRate(BigDecimal.valueOf(utilizeRate).setScale(0, RoundingMode.UP).toPlainString());
         dashBoardAccount.setUsdBalance(df.format(accountInfo.getUsdBalance()));
-        dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate() * 100));
-        dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate() * 100));
-        dashBoardAccount.setReshuffleProgress(df.format(accountInfo.getReshuffleProgress() * 100));
-        dashBoardAccount.setReshuffleProgress2(df.format(accountInfo.getReshuffleProgress2() * 100));
+        dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate() * 100.0));
+        dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate() * 100.0));
+        dashBoardAccount.setReshuffleProgress(df.format(accountInfo.getReshuffleProgress() * 100.0));
+        dashBoardAccount.setReshuffleProgress2(df.format(accountInfo.getReshuffleProgress2() * 100.0));
         return dashBoardAccount;
     }
 
