@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.Collections;
@@ -20,7 +18,7 @@ import java.util.stream.Collectors;
 @Controller
 public class DashBoardController {
 
-    private final DecimalFormat df = new DecimalFormat("#,###.##");
+    private final DecimalFormat df = new DecimalFormat("#,###.00");
 
     @Autowired
     DashboardProvider dashboardProvider;
@@ -42,7 +40,7 @@ public class DashBoardController {
         DashboardLiveData.AccountInfo accountInfo = dashboardProvider.getDashBoard().getAccountInfo();
         dashBoardAccount.setBalance(df.format(accountInfo.getBalance()));
         double utilizeRate = (accountInfo.getBalance() - accountInfo.getUsdBalance()) * 100.0 / accountInfo.getBalance();
-        dashBoardAccount.setUtilizeRate(BigDecimal.valueOf(utilizeRate).setScale(0, RoundingMode.UP).toPlainString());
+        dashBoardAccount.setUtilizeRate(df.format(utilizeRate));
         dashBoardAccount.setUsdBalance(df.format(accountInfo.getUsdBalance()));
         dashBoardAccount.setSharpUpRate(df.format(accountInfo.getSharpUpRate() * 100.0));
         dashBoardAccount.setSharpDownRate(df.format(accountInfo.getSharpDownRate() * 100.0));
