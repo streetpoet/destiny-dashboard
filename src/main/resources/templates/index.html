@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>DESTINY DASHBOARD</title>
+    <title>DESTINY V3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/css/bootstrap.sketchy.min.css}" rel="stylesheet">
+    <link href="../static/css/bootstrap.sketchy.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid" style="padding: 20px;">
@@ -12,13 +13,15 @@
         <div class="col-12">
             <div class="card mb-3">
                 <h3 class="card-header p-3 mb-1">DESTINY V3</h3>
-                <img class="img-fluid p-4" style="height: 50vh;" th:src="@{/img/horde.png}"/>
+                <div class="card-body py-5">
+                    <h5 class="card-title">Of Course I Still Love You</h5>
+                </div>
             </div>
         </div>
     </div>
     <div class="row pt-4">
         <div class="d-grid gap-2 pt-2">
-            <a class="btn btn-lg btn-outline-primary p-3" href="/dashboard">ENTER DASHBOARD</a>
+            <a class="btn btn-lg btn-primary p-3" href="/dashboard">ENTER DASHBOARD</a>
         </div>
     </div>
 </div>
